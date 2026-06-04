@@ -1,0 +1,22 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)\\.(avif|webp|png|jpg|jpeg|gif|ico|svg)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(script\\.js|js/icons\\.js|style\\.deferred\\.css|critical\\.css|style\\.css)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ]
+}
