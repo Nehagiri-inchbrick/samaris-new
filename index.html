@@ -176,7 +176,7 @@
         }
 
         body.footer-only-page .footer-section {
-            padding-top: 140px;
+            padding-top: 56px;
         }
 
         /* Light banner + readable fixed header on this layout */
@@ -2061,6 +2061,35 @@
             <circle cx="12" cy="12" r="10" />
             <polyline points="12 6 12 12 16 14" />
         </symbol>
+        <symbol id="icon-crown" viewBox="0 0 24 24">
+            <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.019a.5.5 0 0 1 .798-.519l4.277 3.664a1 1 0 0 0 1.516-.294z" />
+            <path d="M5 21h14" />
+        </symbol>
+        <symbol id="icon-bed-double" viewBox="0 0 24 24">
+            <path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" />
+            <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" />
+            <path d="M12 4v6" />
+            <path d="M2 18h20" />
+        </symbol>
+        <symbol id="icon-ruler" viewBox="0 0 24 24">
+            <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0z" />
+            <path d="m14.5 12.5 2-2" />
+            <path d="m11.5 9.5 2-2" />
+            <path d="m8.5 6.5 2-2" />
+            <path d="m17.5 15.5 2-2" />
+        </symbol>
+        <symbol id="icon-indian-rupee" viewBox="0 0 24 24">
+            <path d="M6 3h12" />
+            <path d="M6 8h12" />
+            <path d="m6 13 8.5 8" />
+            <path d="m6 13h9" />
+            <path d="M6 18h6" />
+        </symbol>
+        <symbol id="icon-key-round" viewBox="0 0 24 24">
+            <path d="M2 18v3c0 .6.4 1 1 1h3" />
+            <path d="M15 6c0-3.3-2.7-6-6-6S3 2.7 3 6s2.7 6 6 6 6-2.7 6-6z" />
+            <circle cx="9" cy="6" r="1" />
+        </symbol>
     </svg>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M9JVQ5R6" height="0" width="0"
@@ -2283,10 +2312,13 @@
 
     <style>
         /* =========================================
-           ELITE COMMUNITY BANNER — Centered
+           ELITE COMMUNITY BANNER — Compact Ad Strip
            ========================================= */
         .ec-banner {
-            background: linear-gradient(120deg, #f5f0e8 0%, #faf7f2 55%, #ede8df 100%);
+            padding: clamp(20px, 3.5vw, 32px) clamp(16px, 3vw, 24px);
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(197, 160, 89, 0.12), transparent 60%),
+                linear-gradient(180deg, #f8f3ec 0%, #f0e8dc 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -2294,91 +2326,99 @@
             position: relative;
         }
 
-        /* Center panel */
         .ec-banner__center {
             width: 100%;
-            max-width: 860px;
-            padding: 48px 40px 36px;
+            max-width: 960px;
+            padding: clamp(18px, 2.8vw, 24px) clamp(18px, 3vw, 28px) clamp(14px, 2.2vw, 18px);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            border-radius: 14px;
+            border: 1px solid rgba(197, 160, 89, 0.32);
+            background: linear-gradient(135deg, #fffdf9 0%, #faf5ee 55%, #fffdf9 100%);
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+                0 8px 28px rgba(197, 160, 89, 0.12);
         }
 
-        /* Heading */
         .ec-banner__heading {
             font-family: Georgia, 'Times New Roman', serif;
-            font-size: clamp(22px, 2.4vw, 38px);
-            font-weight: 400;
-            line-height: 1.2;
+            font-size: clamp(20px, 2.6vw, 32px);
+            font-weight: 500;
+            line-height: 1.15;
             color: #1a1a1a;
             letter-spacing: -0.3px;
-            margin: 0 0 14px 0;
+            margin: 0 0 8px;
         }
 
         .ec-banner__heading--gold {
-            color: #b8921f;
+            background: linear-gradient(135deg, #a68045, #c5a059, #e5c17b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-style: italic;
         }
 
-        /* Ornament */
         .ec-banner__ornament {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 14px;
             width: 100%;
-            max-width: 260px;
+            max-width: 220px;
         }
 
         .ec-banner__orn-line {
             flex: 1;
             height: 1px;
-            background: linear-gradient(to right, transparent, rgba(197, 160, 89, 0.55));
+            background: linear-gradient(to right, transparent, rgba(197, 160, 89, 0.65));
         }
 
         .ec-banner__orn-line:last-child {
-            background: linear-gradient(to left, transparent, rgba(197, 160, 89, 0.55));
+            background: linear-gradient(to left, transparent, rgba(197, 160, 89, 0.65));
         }
 
         .ec-banner__orn-icon {
             flex-shrink: 0;
+            width: 16px;
+            height: 16px;
         }
 
-        /* Info row: price + separator + location */
         .ec-banner__info-row {
             display: flex;
             align-items: center;
-            gap: 0;
-            margin-bottom: 20px;
-            width: 100%;
             justify-content: center;
+            gap: 0;
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 12px 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(197, 160, 89, 0.22);
         }
 
-        /* Price column */
         .ec-banner__price-col {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 0 36px;
+            padding: 0 clamp(14px, 2.5vw, 28px);
         }
 
-        /* Price label */
         .ec-banner__label {
             font-size: 9px;
-            letter-spacing: 3px;
-            color: #777;
-            font-weight: 600;
+            letter-spacing: 2.5px;
+            color: #6b7280;
+            font-weight: 700;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        /* Price box */
         .ec-banner__price-box {
-            border: 1px solid rgba(197, 160, 89, 0.5);
-            border-radius: 8px;
-            padding: 8px 24px 10px;
-            background: rgba(197, 160, 89, 0.04);
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            background: transparent;
             text-align: center;
         }
 
@@ -2391,34 +2431,34 @@
         }
 
         .ec-banner__currency {
-            font-size: clamp(14px, 1.3vw, 20px);
+            font-size: clamp(13px, 1.2vw, 18px);
             color: #b8921f;
             font-weight: 700;
-            padding-top: 5px;
+            padding-top: 4px;
             font-family: 'Montserrat', sans-serif;
         }
 
         .ec-banner__amount {
             font-family: Georgia, serif;
-            font-size: clamp(40px, 3.8vw, 58px);
+            font-size: clamp(34px, 3.5vw, 48px);
             font-weight: 700;
             color: #b8921f;
-            letter-spacing: -2px;
+            letter-spacing: -1.5px;
             line-height: 1;
         }
 
         .ec-banner__cr {
-            font-size: clamp(12px, 1.1vw, 16px);
+            font-size: clamp(11px, 1vw, 14px);
             color: #b8921f;
             font-weight: 700;
-            padding-top: 8px;
+            padding-top: 6px;
             font-family: 'Montserrat', sans-serif;
         }
 
         .ec-banner__price-sub {
-            font-size: 9.5px;
-            letter-spacing: 2px;
-            color: #666;
+            font-size: 9px;
+            letter-spacing: 1.6px;
+            color: #6b7280;
             text-transform: uppercase;
             margin-top: 4px;
             font-family: 'Montserrat', sans-serif;
@@ -2428,76 +2468,77 @@
             color: #b8921f;
         }
 
-        /* Vertical separator */
         .ec-banner__vsep {
             width: 1px;
-            height: 72px;
-            background: linear-gradient(to bottom, transparent, rgba(197, 160, 89, 0.45), transparent);
+            height: 56px;
+            background: linear-gradient(to bottom, transparent, rgba(197, 160, 89, 0.5), transparent);
             flex-shrink: 0;
         }
 
-        /* Location */
         .ec-banner__location {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
-            padding: 0 36px;
+            gap: 8px;
+            padding: 0 clamp(14px, 2.5vw, 28px);
             text-align: left;
         }
 
         .ec-banner__location svg {
             flex-shrink: 0;
             margin-top: 2px;
+            width: 13px;
+            height: 13px;
         }
 
         .ec-banner__loc-name {
-            font-size: 11px;
-            letter-spacing: 2.5px;
+            font-size: 10px;
+            letter-spacing: 2px;
             color: #1a1a1a;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .ec-banner__loc-sub {
-            font-size: 9px;
-            letter-spacing: 1.5px;
-            color: #777;
+            font-size: 8.5px;
+            letter-spacing: 1.3px;
+            color: #6b7280;
             text-transform: uppercase;
+            line-height: 1.4;
         }
 
         .ec-banner__loc-sub strong {
             color: #b8921f;
         }
 
-        /* Horizontal divider */
         .ec-banner__hdivider {
-            width: 100%;
-            max-width: 500px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(197, 160, 89, 0.4), transparent);
-            margin-bottom: 14px;
+            display: none;
         }
 
-        /* Footer line */
         .ec-banner__footer {
-            font-size: 8.5px;
-            letter-spacing: 2.5px;
-            color: #aaa;
+            margin: 0;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(197, 160, 89, 0.14);
+            border: 1px solid rgba(197, 160, 89, 0.28);
+            font-size: 8px;
+            letter-spacing: 2.2px;
+            color: #5c4a2a;
             text-transform: uppercase;
             font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
         }
 
-        /* Responsive */
         @media (max-width: 640px) {
             .ec-banner__info-row {
                 flex-direction: column;
-                gap: 20px;
+                gap: 14px;
+                padding: 14px 12px;
             }
 
             .ec-banner__vsep {
-                width: 60px;
+                width: 56px;
                 height: 1px;
-                background: linear-gradient(to right, transparent, rgba(197, 160, 89, 0.4), transparent);
+                background: linear-gradient(to right, transparent, rgba(197, 160, 89, 0.45), transparent);
             }
 
             .ec-banner__location {
@@ -2506,45 +2547,22 @@
             }
 
             .ec-banner__center {
-                padding: 36px 20px 28px;
+                padding: 18px 16px 14px;
+            }
+
+            .ec-banner__footer {
+                font-size: 7px;
+                letter-spacing: 1.6px;
+                padding: 7px 12px;
+                line-height: 1.5;
             }
         }
     </style>
 
-    <!-- Overview: Cinematic Dark Section -->
-    <section class="ov2" id="overview" aria-label="Project overview">
-        <div class="ov2__bg">
-            <picture>
-                <source type="image/webp" media="(max-width: 768px)" srcset="night-640.webp">
-                <source type="image/webp" media="(max-width: 1280px)" srcset="night-960.webp">
-                <img src="night.webp" alt="Godrej Properties Samaris night view" class="ov2__bg-img" width="1920"
-                    height="1080" loading="lazy" decoding="async">
-            </picture>
-            <div class="ov2__overlay"></div>
-        </div>
-        <div class="container ov2__inner">
 
+ 
 
-            <!-- Stats strip -->
-            <div class="ov2__stats reveal-up">
-                <div class="ov2-stat">
-                    <span class="ov2-stat__num">7.5 ACRES</span>
-                    <span class="ov2-stat__label">OF ECOSYSTEM</span>
-                </div>
-                <div class="ov2-stat__sep" aria-hidden="true"></div>
-                <div class="ov2-stat">
-                    <span class="ov2-stat__num">5 LUXURY</span>
-                    <span class="ov2-stat__label">TOWERS</span>
-                </div>
-                <div class="ov2-stat__sep" aria-hidden="true"></div>
-                <div class="ov2-stat">
-                    <span class="ov2-stat__num">84%</span>
-                    <span class="ov2-stat__label">DEDICATED GREEN</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Amenities: Left Side Heading, Right Side Slides (Attractive & Unique) -->
+  
     <section id="amenities" class="premium-amenities" aria-label="Amenities">
         <div class="premium-amenities__bg-glow" aria-hidden="true"></div>
         <div class="premium-amenities__container">
@@ -2668,7 +2686,187 @@
         </div>
     </section>
 
+    <!-- Pricing & Payment Plan -->
+    <section id="pricing" class="price-plan" aria-label="Pricing and payment plan">
+        <div class="price-plan__bg" aria-hidden="true"></div>
+        <div class="container price-plan__inner">
+            <header class="price-plan__hero reveal-up">
+                <h2 class="price-plan__title">Payment Plan</h2>
+                <p class="price-plan__rate"><span>₹32999</span> – <span>₹34999</span></p>
+                <p class="price-plan__note">+IFMS +CAM +GOV. CHARGES</p>
+            </header>
 
+            <div class="price-plan__board reveal-up">
+                <div class="price-plan__col price-plan__col--units">
+                    <h3 class="price-plan__heading">Residence Pricing</h3>
+                    <div class="price-plan__table" role="table" aria-label="Residence pricing">
+                        <div class="price-plan__row price-plan__row--head" role="row">
+                            <span role="columnheader">Typology</span>
+                            <span role="columnheader">Type</span>
+                            <span role="columnheader">Min BV (Cr.)</span>
+                            <span role="columnheader">Max BV (Cr.)</span>
+                        </div>
+                        <div class="price-plan__row" role="row">
+                            <span role="cell">3 BHK - GRANDEUR</span>
+                            <span role="cell">2935 - 2984</span>
+                            <span role="cell">₹9.68</span>
+                            <span role="cell">₹10.44</span>
+                        </div>
+                        <div class="price-plan__row" role="row">
+                            <span role="cell">4 BHK - LUXE</span>
+                            <span role="cell">3723 - 3750</span>
+                            <span role="cell">₹12.29</span>
+                            <span role="cell">₹13.12</span>
+                        </div>
+                    </div>
+                    <div class="price-plan__offers">
+                        <p class="price-plan__offer">OFFER 1 - EARLY BIRD OFFER- ₹500 ; ENDING ON 31ST MAY, 2026</p>
+                        <p class="price-plan__offer">OFFER 2 - EARLY PAYMENT REBATE- ₹500</p>
+                    </div>
+                </div>
+
+                <div class="price-plan__divider" aria-hidden="true"></div>
+
+                <div class="price-plan__col price-plan__col--pay">
+                    <h3 class="price-plan__heading">Payment Plan</h3>
+                    <ul class="price-plan__milestones">
+                        <li>
+                            <span class="price-plan__step">APPLICATION MONEY (FORMS A PART OF BOOKING AMOUNT)</span>
+                            <strong class="price-plan__pct">5%</strong>
+                        </li>
+                        <li>
+                            <span class="price-plan__step">WITHIN 18 DAYS OF BOOKING</span>
+                            <strong class="price-plan__pct">5%</strong>
+                        </li>
+                        <li>
+                            <span class="price-plan__step">ON 15TH FEB, 2027</span>
+                            <strong class="price-plan__pct">15%</strong>
+                        </li>
+                        <li>
+                            <span class="price-plan__step">ON COMPLETION OF 18TH FLOOR SLAB</span>
+                            <strong class="price-plan__pct">25%</strong>
+                        </li>
+                        <li>
+                            <span class="price-plan__step">ON COMPLETION OF SUPER STRUCTURE</span>
+                            <strong class="price-plan__pct">25%</strong>
+                        </li>
+                        <li>
+                            <span class="price-plan__step">ON APPLICATION OF OC</span>
+                            <strong class="price-plan__pct">20%</strong>
+                        </li>
+                        <li>
+                            <span class="price-plan__step">ON OFFER OF POSSESSION</span>
+                            <strong class="price-plan__pct">5%</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="price-plan__cta-wrap reveal-up">
+                <button type="button" class="price-plan__cta" data-enquire-open>
+                    Request Pricing Details <i data-lucide="move-right" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="residences" class="phase-towers" aria-label="Phase 1 premium residences">
+        <div class="phase-towers__bg" aria-hidden="true"></div>
+        <div class="container phase-towers__inner">
+            <header class="phase-towers__head reveal-up">
+                <div class="phase-towers__brand">
+                    <svg class="phase-towers__brand-icon" viewBox="0 0 48 32" width="48" height="32" aria-hidden="true">
+                        <rect x="4" y="10" width="10" height="20" rx="1" fill="currentColor" opacity="0.9" />
+                        <rect x="19" y="4" width="10" height="26" rx="1" fill="currentColor" />
+                        <rect x="34" y="12" width="10" height="18" rx="1" fill="currentColor" opacity="0.9" />
+                    </svg>
+                    <span class="phase-towers__kicker">Phase 1</span>
+                </div>
+                <h2 class="phase-towers__title">Launching with only two<br><em>premium towers</em> in Phase 1</h2>
+                <p class="phase-towers__sub">Thoughtfully designed residences. Elevated lifestyle. Exceptional value.</p>
+                <div class="phase-towers__ornament" aria-hidden="true">
+                    <span class="phase-towers__orn-line"></span>
+                    <span class="phase-towers__orn-diamond"></span>
+                    <span class="phase-towers__orn-line"></span>
+                </div>
+            </header>
+
+            <div class="phase-towers__grid">
+                <article class="phase-towers__card reveal-up">
+                    <div class="phase-towers__panel phase-towers__panel--a">
+                        <i data-lucide="crown" class="phase-towers__panel-icon" aria-hidden="true"></i>
+                        <h3 class="phase-towers__tower">Tower A</h3>
+                        <p class="phase-towers__tagline">Modern Living, Perfected</p>
+                        <ul class="phase-towers__facts">
+                            <li>
+                                <span class="phase-towers__fact-icon"><i data-lucide="bed-double" aria-hidden="true"></i></span>
+                                <span>3 BHK Residences</span>
+                            </li>
+                            <li>
+                                <span class="phase-towers__fact-icon"><i data-lucide="ruler" aria-hidden="true"></i></span>
+                                <span>2935–2984 sq.ft.</span>
+                            </li>
+                            <li>
+                                <span class="phase-towers__fact-icon"><i data-lucide="indian-rupee" aria-hidden="true"></i></span>
+                                <span>starting at <strong>₹9.68 Cr</strong></span>
+                            </li>
+                        </ul>
+                        <button type="button" class="phase-towers__explore" data-enquire-open>
+                            Explore Tower A <i data-lucide="move-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="phase-towers__visual">
+                        <span class="phase-towers__ribbon">Limited Units</span>
+                        <img src="images/3bhk-grandeur-2.png" width="640" height="480"
+                            alt="Fortune 3BHK Grandeur 2 floor plan model" loading="lazy" decoding="async"
+                            class="phase-towers__img">
+                    </div>
+                </article>
+
+                <article class="phase-towers__card reveal-up">
+                    <div class="phase-towers__panel phase-towers__panel--b">
+                        <i data-lucide="gem" class="phase-towers__panel-icon" aria-hidden="true"></i>
+                        <h3 class="phase-towers__tower">Tower B</h3>
+                        <p class="phase-towers__tagline">Space for Moments that Matter</p>
+                        <ul class="phase-towers__facts">
+                            <li>
+                                <span class="phase-towers__fact-icon"><i data-lucide="bed-double" aria-hidden="true"></i></span>
+                                <span>4 BHK Residences</span>
+                            </li>
+                            <li>
+                                <span class="phase-towers__fact-icon"><i data-lucide="ruler" aria-hidden="true"></i></span>
+                                <span>3723–3750 sq.ft.</span>
+                            </li>
+                            <li>
+                                <span class="phase-towers__fact-icon"><i data-lucide="indian-rupee" aria-hidden="true"></i></span>
+                                <span>starting at <strong>₹12.29 Cr</strong></span>
+                            </li>
+                        </ul>
+                        <button type="button" class="phase-towers__explore" data-enquire-open>
+                            Explore Tower B <i data-lucide="move-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="phase-towers__visual">
+                        <span class="phase-towers__ribbon phase-towers__ribbon--green">Limited Units</span>
+                        <img src="images/4bhk-luxe-2.png" width="640" height="480"
+                            alt="Fortune 4BHK Luxe 2 floor plan model" loading="lazy" decoding="async"
+                            class="phase-towers__img">
+                    </div>
+                </article>
+            </div>
+
+            <footer class="phase-towers__footer reveal-up">
+                <span class="phase-towers__leaf phase-towers__leaf--left" aria-hidden="true"></span>
+                <button type="button" class="phase-towers__access" data-enquire-open>
+                    <i data-lucide="key-round" aria-hidden="true"></i>
+                    <span>Request Private Access</span>
+                    <i data-lucide="move-right" aria-hidden="true"></i>
+                </button>
+                <span class="phase-towers__leaf phase-towers__leaf--right" aria-hidden="true"></span>
+                <p class="phase-towers__footnote">Exclusive access. Limited availability.</p>
+            </footer>
+        </div>
+    </section>
     <!-- Location Connectivity -->
     <section class="loc" id="location" aria-label="Location">
         <div class="loc__bg" aria-hidden="true"></div>
@@ -3077,12 +3275,10 @@
             <div class="footer-top reveal-up">
                 <div class="footer-cta">
                     <h2>EOIs are Open Now</h2>
-                    <p class="footer-short"
-                        style="font-size: 1.4rem; opacity: 0.85; margin: 20px 0 0; max-width: 700px; line-height: 1.5; text-align: left;">
+                    <p class="footer-short">
                         Register Your Interest & claim the last premium address on Golf Course Road.</p>
 
-                    <button id="footerEnquireBtn" class="hero__btn hero__btn--primary"
-                        style="margin: 30px 0; border: none; cursor: pointer;">CALL NOW</button>
+                    <button id="footerEnquireBtn" class="hero__btn hero__btn--primary footer-enquire-btn">CALL NOW</button>
 
                     <div class="footer-contacts" aria-label="Contact details">
                         <a class="footer-contact" href="tel:+971547614449"><i data-lucide="phone"></i><span>+971

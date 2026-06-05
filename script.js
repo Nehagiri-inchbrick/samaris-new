@@ -619,6 +619,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    document.querySelectorAll('[data-enquire-open]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(e.currentTarget);
+        });
+    });
+
     if (enquiryModal) {
         enquiryModal.addEventListener('click', (e) => {
             if (!isModalOpen()) return;
