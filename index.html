@@ -1752,10 +1752,11 @@
         }
 
         .brochure-fab .icon,
-        .brochure-fab [data-lucide] {
+        .footer-brochure-btn .icon {
             width: 18px;
             height: 18px;
             flex-shrink: 0;
+            display: block;
         }
 
         .footer-cta__actions {
@@ -2306,7 +2307,12 @@
                         EXPLORE RESIDENCES <i data-lucide="move-right"></i>
                     </a>
                     <button type="button" class="hero__btn hero__btn--outline" data-enquire-open data-lead-source="brochure">
-                        DOWNLOAD BROCHURE <i data-lucide="download"></i>
+                        DOWNLOAD BROCHURE
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 15V3" />
+                            <path d="m7 10 5 5 5-5" />
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        </svg>
                     </button>
                     <a href="#connectivity" class="hero__btn hero__btn--outline">
                         VIEW CONNECTIVITY <i data-lucide="map"></i>
@@ -3370,7 +3376,12 @@
                     <div class="footer-cta__actions">
                         <button id="footerEnquireBtn" class="hero__btn hero__btn--primary footer-enquire-btn">CALL NOW</button>
                         <button type="button" class="hero__btn hero__btn--outline footer-brochure-btn" data-enquire-open data-lead-source="brochure">
-                            DOWNLOAD BROCHURE <i data-lucide="download"></i>
+                            DOWNLOAD BROCHURE
+                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 15V3" />
+                                <path d="m7 10 5 5 5-5" />
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            </svg>
                         </button>
                     </div>
 
@@ -3396,7 +3407,11 @@
     </footer>
 
     <button type="button" class="brochure-fab" data-enquire-open data-lead-source="brochure" aria-label="Download brochure">
-        <i data-lucide="download" aria-hidden="true"></i>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 15V3" />
+            <path d="m7 10 5 5 5-5" />
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        </svg>
         <span class="brochure-fab__label">Download Brochure</span>
     </button>
 

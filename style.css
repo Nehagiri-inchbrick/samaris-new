@@ -2113,9 +2113,65 @@ body.footer-only-page .header.scrolled .nav-cta {
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+    .gallery-creative__inner.container {
+        overflow: visible;
+    }
+
     .gallery-creative__mosaic {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 14px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 20px;
+        padding-bottom: 10px;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(197, 160, 89, 0.45) rgba(255, 255, 255, 0.06);
+    }
+
+    .gallery-creative__mosaic::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .gallery-creative__mosaic::-webkit-scrollbar-thumb {
+        background: rgba(197, 160, 89, 0.45);
+        border-radius: 999px;
+    }
+
+    .gallery-creative__mosaic::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 999px;
+    }
+
+    .gc-card {
+        flex: 0 0 min(82vw, 300px);
+        width: min(82vw, 300px);
+        min-height: 260px;
+        scroll-snap-align: start;
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .gc-card--large,
+    .gc-card--tall,
+    .gc-card--wide {
+        flex: 0 0 min(88vw, 320px);
+        width: min(88vw, 320px);
+        min-height: 280px;
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .gc-card:hover {
+        transform: translateY(0);
     }
 }
 
