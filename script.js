@@ -70,7 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Marketing lead forms → Inchbrick API
     const INCHBRICK_CONTACT_URL = 'https://admin.inchbrick.com/api/contact';
     const LEAD_PAGE_SOURCE = 'Godrej Samaris Website';
+    const LEAD_BROCHURE_SOURCE = 'Godrej Samaris Website - Brochure Download';
+    const BROCHURE_PDF_URL = 'godrej-samaris-brochure.pdf';
     const THANK_YOU_URL = 'thank-you.html?lead=1';
+
+    const triggerBrochureDownload = () => {
+        const link = document.createElement('a');
+        link.href = BROCHURE_PDF_URL;
+        link.download = 'Godrej-Samaris-Brochure.pdf';
+        link.rel = 'noopener';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+    };
 
     const getLeadFeedbackEl = (form) => form.querySelector('[data-lead-feedback]');
 
@@ -152,11 +164,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (window.createIcons) window.createIcons(btn);
             }
 
+            const isBrochureLead = form.dataset.leadIntent === 'brochure';
             const payload = {
                 name,
                 email,
                 mobile,
-                page: LEAD_PAGE_SOURCE
+                page: isBrochureLead ? LEAD_BROCHURE_SOURCE : LEAD_PAGE_SOURCE
             };
 
             let httpOk = false;
@@ -169,6 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (res.ok) {
                     httpOk = true;
+                    if (isBrochureLead) {
+                        triggerBrochureDownload();
+                    }
                     window.setTimeout(function () {
                         window.location.href = THANK_YOU_URL;
                     }, 400);
@@ -549,9 +565,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastModalTrigger = null;
 
     const isModalOpen = () => enquiryModal?.classList.contains('is-active');
+    const popupForm = document.getElementById('popup-form');
+
+    const setPopupLeadIntent = (trigger) => {
+        if (!popupForm) return;
+        if (trigger && trigger.dataset.leadSource === 'brochure') {
+            popupForm.dataset.leadIntent = 'brochure';
+        } else {
+            delete popupForm.dataset.leadIntent;
+        }
+    };
 
     const openModal = (trigger) => {
         if (!enquiryModal) return;
+        setPopupLeadIntent(trigger);
         lastModalTrigger = trigger && trigger.focus ? trigger : document.activeElement;
         enquiryModal.classList.add('is-active');
         enquiryModal.removeAttribute('inert');
@@ -584,6 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
         enquiryModal.setAttribute('aria-hidden', 'true');
         enquiryModal.setAttribute('inert', '');
         document.body.style.overflow = '';
+        if (popupForm) delete popupForm.dataset.leadIntent;
         const returnFocus = lastModalTrigger;
         lastModalTrigger = null;
         requestAnimationFrame(() => {
@@ -639,6 +667,15 @@ document.addEventListener('DOMContentLoaded', () => {
             openModal(e.currentTarget);
         });
     });
+
+    const brochureFab = document.querySelector('.brochure-fab');
+    if (brochureFab) {
+        const toggleBrochureFab = () => {
+            brochureFab.classList.toggle('is-visible', window.scrollY > 320);
+        };
+        toggleBrochureFab();
+        window.addEventListener('scroll', toggleBrochureFab, { passive: true });
+    }
 
     if (enquiryModal) {
         enquiryModal.addEventListener('click', (e) => {

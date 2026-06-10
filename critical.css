@@ -139,6 +139,7 @@ body.footer-only-page .header.scrolled .nav-cta {
     height: 100%;
 }
 
+<<<<<<< HEAD
 .hero__bg::before {
     content: "";
     position: absolute;
@@ -150,20 +151,29 @@ body.footer-only-page .header.scrolled .nav-cta {
         inset 0 -60px 80px rgba(0, 0, 0, 0.12);
 }
 
+=======
+>>>>>>> 0277613f1e633934174242cb21b399632d9587eb
 .hero__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+<<<<<<< HEAD
     opacity: 1;
     filter: brightness(1.14) saturate(1.2) contrast(1.07);
+=======
+    opacity: 0.6;
+>>>>>>> 0277613f1e633934174242cb21b399632d9587eb
     animation: heroKenBurns 30s linear infinite alternate;
 }
 
 @media (max-width: 768px) {
     .hero__img {
         animation: none;
+<<<<<<< HEAD
         opacity: 0.96;
         filter: brightness(1.1) saturate(1.15) contrast(1.05);
+=======
+>>>>>>> 0277613f1e633934174242cb21b399632d9587eb
     }
 }
 
@@ -182,11 +192,19 @@ body.footer-only-page .header.scrolled .nav-cta {
     inset: 0;
     background: 
         linear-gradient(90deg,
+<<<<<<< HEAD
             rgba(0, 0, 0, 0.58) 0%,
             rgba(0, 0, 0, 0.34) 45%,
             rgba(0, 0, 0, 0.08) 100%),
         linear-gradient(0deg,
             rgba(0, 0, 0, 0.12) 0%,
+=======
+            rgba(0, 0, 0, 0.92) 0%,
+            rgba(0, 0, 0, 0.65) 45%,
+            rgba(0, 0, 0, 0.25) 100%),
+        linear-gradient(0deg,
+            rgba(0, 0, 0, 0.5) 0%,
+>>>>>>> 0277613f1e633934174242cb21b399632d9587eb
             transparent 40%);
 }
 
@@ -270,6 +288,7 @@ body.footer-only-page .header.scrolled .nav-cta {
 }
 
 .hero__title--alt {
+<<<<<<< HEAD
     font-family: Georgia, 'Times New Roman', serif;
     font-style: italic;
     text-transform: none;
@@ -305,6 +324,17 @@ body.footer-only-page .header.scrolled .nav-cta {
     border-radius: 2px;
     background: linear-gradient(90deg, #e5c17b 0%, #f0ddb0 45%, rgba(240, 221, 176, 0.2) 100%);
     box-shadow: 0 0 18px rgba(197, 160, 89, 0.65);
+=======
+    font-family: 'Pinyon Script', cursive;
+    text-transform: none;
+    color: var(--primary);
+    font-size: 1.15em;
+    font-weight: 400;
+    display: block;
+    margin-top: 8px;
+    letter-spacing: 0;
+    text-shadow: 0 0 15px rgba(197, 160, 89, 0.25);
+>>>>>>> 0277613f1e633934174242cb21b399632d9587eb
 }
 
 .hero__divider {
@@ -806,11 +836,14 @@ body.footer-only-page .header.scrolled .nav-cta {
         justify-content: center;
     }
 
+<<<<<<< HEAD
     .hero__title--alt::after {
         margin-left: auto;
         margin-right: auto;
     }
 
+=======
+>>>>>>> 0277613f1e633934174242cb21b399632d9587eb
     .hero__features {
         justify-content: center;
         flex-wrap: wrap;

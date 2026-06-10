@@ -1169,7 +1169,7 @@
                 width: 100%;
                 max-width: 400px;
                 gap: 12px;
-                min-height: 118px;
+                min-height: 168px;
                 margin-bottom: 32px;
             }
 
@@ -1707,6 +1707,75 @@
             pointer-events: none;
         }
 
+        /* Floating Download Brochure CTA */
+        .brochure-fab {
+            position: fixed;
+            right: clamp(16px, 3vw, 28px);
+            bottom: clamp(20px, 4vw, 32px);
+            z-index: 9000;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 22px;
+            border: 1px solid rgba(229, 193, 123, 0.65);
+            border-radius: 999px;
+            background: linear-gradient(135deg, #e5c17b 0%, #c5a059 50%, #a68045 100%);
+            color: #1a1208;
+            font: 700 11px/1.2 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.35),
+                0 0 24px rgba(197, 160, 89, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+        }
+
+        .brochure-fab.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .brochure-fab:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 12px 36px rgba(0, 0, 0, 0.4),
+                0 0 32px rgba(197, 160, 89, 0.45);
+        }
+
+        .brochure-fab.is-visible:hover {
+            transform: translateY(-3px);
+        }
+
+        .brochure-fab .icon,
+        .brochure-fab [data-lucide] {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .footer-cta__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .brochure-fab__label {
+                display: none;
+            }
+
+            .brochure-fab {
+                padding: 14px;
+                border-radius: 50%;
+            }
+        }
+
         /* Elite Community Highlight Section Styles */
         .elite-highlight-section {
             background-color: #FAF9F6;
@@ -2236,6 +2305,9 @@
                     <a href="#" id="exploreResidencesBtn" class="hero__btn hero__btn--primary">
                         EXPLORE RESIDENCES <i data-lucide="move-right"></i>
                     </a>
+                    <button type="button" class="hero__btn hero__btn--outline" data-enquire-open data-lead-source="brochure">
+                        DOWNLOAD BROCHURE <i data-lucide="download"></i>
+                    </button>
                     <a href="#connectivity" class="hero__btn hero__btn--outline">
                         VIEW CONNECTIVITY <i data-lucide="map"></i>
                     </a>
@@ -3295,7 +3367,12 @@
                     <p class="footer-short">
                         Register Your Interest & claim the last premium address on Golf Course Road.</p>
 
-                    <button id="footerEnquireBtn" class="hero__btn hero__btn--primary footer-enquire-btn">CALL NOW</button>
+                    <div class="footer-cta__actions">
+                        <button id="footerEnquireBtn" class="hero__btn hero__btn--primary footer-enquire-btn">CALL NOW</button>
+                        <button type="button" class="hero__btn hero__btn--outline footer-brochure-btn" data-enquire-open data-lead-source="brochure">
+                            DOWNLOAD BROCHURE <i data-lucide="download"></i>
+                        </button>
+                    </div>
 
                     <div class="footer-contacts" aria-label="Contact details">
                         <a class="footer-contact" href="tel:+971547614449"><i data-lucide="phone"></i><span>+971
@@ -3317,6 +3394,11 @@
             </div>
         </div>
     </footer>
+
+    <button type="button" class="brochure-fab" data-enquire-open data-lead-source="brochure" aria-label="Download brochure">
+        <i data-lucide="download" aria-hidden="true"></i>
+        <span class="brochure-fab__label">Download Brochure</span>
+    </button>
 
     <!-- Enquiry Popup Modal -->
     <div id="enquiryModal" class="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="enquiryModalTitle"
