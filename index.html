@@ -3303,24 +3303,29 @@
 
             <div class="gallery-creative__mosaic reveal-up revealed">
                 <figure class="gc-card gc-card--large">
-                    <img src="images/4.PNG" alt="Night exterior view" loading="lazy" decoding="async">
-                    
+                    <button type="button" class="gc-card__open" aria-label="View Night exterior view">
+                        <img src="images/4.PNG" alt="Night exterior view" loading="lazy" decoding="async">
+                    </button>
                 </figure>
                 <figure class="gc-card">
-                    <img src="images/3.PNG" alt="Rooftop deck view" loading="lazy" decoding="async">
-                    
+                    <button type="button" class="gc-card__open" aria-label="View Rooftop deck view">
+                        <img src="images/3.PNG" alt="Rooftop deck view" loading="lazy" decoding="async">
+                    </button>
                 </figure>
                 <figure class="gc-card">
-                    <img src="images/pool.PNG" alt="Pool amenities view" loading="lazy" decoding="async">
-                    
+                    <button type="button" class="gc-card__open" aria-label="View Pool amenities view">
+                        <img src="images/pool.PNG" alt="Pool amenities view" loading="lazy" decoding="async">
+                    </button>
                 </figure>
                 <figure class="gc-card gc-card--tall">
-                    <img src="images/seating.PNG" alt="Interior gallery view" loading="lazy" decoding="async">
-                    
+                    <button type="button" class="gc-card__open" aria-label="View Interior gallery view">
+                        <img src="images/seating.PNG" alt="Interior gallery view" loading="lazy" decoding="async">
+                    </button>
                 </figure>
                 <figure class="gc-card gc-card--wide">
-                    <img src="images/5.PNG" alt="Lifestyle view" loading="lazy" decoding="async">
-                    
+                    <button type="button" class="gc-card__open" aria-label="View Lifestyle view">
+                        <img src="images/5.PNG" alt="Lifestyle view" loading="lazy" decoding="async">
+                    </button>
                 </figure>
             </div>
 
@@ -3405,6 +3410,30 @@
             </div>
         </div>
     </footer>
+
+    <!-- Gallery Lightbox -->
+    <div id="galleryLightbox" class="gc-lightbox" role="dialog" aria-modal="true" aria-label="Gallery image viewer"
+        aria-hidden="true" inert>
+        <div class="gc-lightbox__overlay" data-gallery-close></div>
+        <div class="gc-lightbox__stage">
+            <button type="button" class="gc-lightbox__close" data-gallery-close aria-label="Close gallery">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="gc-lightbox__nav-row">
+                <button type="button" class="gc-lightbox__nav gc-lightbox__nav--prev" data-gallery-prev aria-label="Previous image">
+                    <i data-lucide="arrow-left"></i>
+                </button>
+                <figure class="gc-lightbox__figure">
+                    <img class="gc-lightbox__img" src="" alt="">
+                    <figcaption class="gc-lightbox__caption"></figcaption>
+                </figure>
+                <button type="button" class="gc-lightbox__nav gc-lightbox__nav--next" data-gallery-next aria-label="Next image">
+                    <i data-lucide="arrow-right"></i>
+                </button>
+            </div>
+            <p class="gc-lightbox__counter" aria-live="polite"></p>
+        </div>
+    </div>
 
     <button type="button" class="brochure-fab" data-enquire-open data-lead-source="brochure" aria-label="Download brochure">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
