@@ -287,18 +287,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Simple Gallery Scroll
-    const galleryContainer = document.querySelector('.gallery-cards');
-    const galleryNext = document.querySelector('.nav-btn-circle.next');
-    const galleryPrev = document.querySelector('.nav-btn-circle.prev');
+    // Creative gallery slider
+    const galleryTrack = document.getElementById('gallery-track');
+    const galleryPrevBtn = document.getElementById('gallery-prev');
+    const galleryNextBtn = document.getElementById('gallery-next');
 
-    if (galleryContainer && galleryNext && galleryPrev) {
-        galleryNext.addEventListener('click', () => {
-            galleryContainer.scrollBy({ left: 300, behavior: 'smooth' });
-        });
-        galleryPrev.addEventListener('click', () => {
-            galleryContainer.scrollBy({ left: -300, behavior: 'smooth' });
-        });
+    if (galleryTrack) {
+        const getGallerySlides = () => Array.from(galleryTrack.querySelectorAll('.gallery-creative__slide'));
+        const getGalleryStep = (slides) => {
+            if (slides.length === 0) return 0;
+            const gap = parseFloat(getComputedStyle(galleryTrack).columnGap || getComputedStyle(galleryTrack).gap) || 16;
+            return slides[0].offsetWidth + gap;
+        };
+
+        if (galleryPrevBtn && galleryNextBtn) {
+            galleryPrevBtn.addEventListener('click', () => {
+                const slides = getGallerySlides();
+                if (slides.length === 0) return;
+                galleryTrack.scrollBy({ left: -getGalleryStep(slides), behavior: 'smooth' });
+            });
+
+            galleryNextBtn.addEventListener('click', () => {
+                const slides = getGallerySlides();
+                if (slides.length === 0) return;
+                galleryTrack.scrollBy({ left: getGalleryStep(slides), behavior: 'smooth' });
+            });
+        }
     }
 
     // Premium Amenities Carousel
@@ -560,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gallery lightbox
     const galleryLightbox = document.getElementById('galleryLightbox');
-    const galleryOpenButtons = document.querySelectorAll('.gallery-creative__mosaic .gc-card__open');
+    const galleryOpenButtons = document.querySelectorAll('.gallery-creative__track .gc-card__open');
     const galleryLightboxImg = galleryLightbox?.querySelector('.gc-lightbox__img');
     const galleryLightboxCaption = galleryLightbox?.querySelector('.gc-lightbox__caption');
     const galleryLightboxCounter = galleryLightbox?.querySelector('.gc-lightbox__counter');

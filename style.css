@@ -2071,6 +2071,26 @@ body.footer-only-page .header.scrolled .nav-cta {
     transition-delay: 360ms;
 }
 
+.gallery-creative.is-revealed .gc-card:nth-child(6) {
+    transition-delay: 420ms;
+}
+
+.gallery-creative.is-revealed .gc-card:nth-child(7) {
+    transition-delay: 480ms;
+}
+
+.gallery-creative.is-revealed .gc-card:nth-child(8) {
+    transition-delay: 540ms;
+}
+
+.gallery-creative.is-revealed .gc-card:nth-child(9) {
+    transition-delay: 600ms;
+}
+
+.gallery-creative.is-revealed .gc-card:nth-child(10) {
+    transition-delay: 660ms;
+}
+
 .gallery-creative__strip {
     margin-top: 16px;
     display: flex;

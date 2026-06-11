@@ -24,7 +24,6 @@
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=2955680104775438&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
-
     <!-- Primary Meta Tags -->
     <title>Godrej Properties Samaris Sector 53 Gurgaon | Near Golf Course Road</title>
     <meta name="title" content="Godrej Properties Samaris Sector 53 Gurgaon | Near Golf Course Road" />
@@ -2384,7 +2383,13 @@
     </section>
     <!-- Elite Community Highlight -->
     <section class="ec-banner" id="elite-community" aria-label="Elite Community Highlight">
-        <div class="ec-banner__center">
+        <div class="ec-banner__wrap">
+            <figure class="ec-banner__media reveal-up">
+                <img src="images/gallery/about-img.webp" alt="Godrej Samaris — a community reserved for the elites"
+                    width="640" height="480" loading="lazy" decoding="async">
+            </figure>
+
+            <div class="ec-banner__center reveal-up">
 
             <!-- Headline -->
             <h2 class="ec-banner__heading">
@@ -2442,6 +2447,7 @@
             <!-- Footer -->
             <p class="ec-banner__footer">LIMITED TO A SELECT
                 FEW.&nbsp;&nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp;&nbsp;ETERNAL BY DESIGN.</p>
+            </div>
         </div>
     </section>
 
@@ -2450,7 +2456,7 @@
            ELITE COMMUNITY BANNER — Compact Ad Strip
            ========================================= */
         .ec-banner {
-            padding: clamp(20px, 3.5vw, 32px) clamp(16px, 3vw, 24px);
+            padding: clamp(28px, 4vw, 48px) clamp(16px, 3vw, 24px);
             background:
                 radial-gradient(ellipse 80% 60% at 50% 0%, rgba(197, 160, 89, 0.12), transparent 60%),
                 linear-gradient(180deg, #f8f3ec 0%, #f0e8dc 100%);
@@ -2461,9 +2467,38 @@
             position: relative;
         }
 
+        .ec-banner__wrap {
+            width: 100%;
+            max-width: 1080px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+            gap: clamp(18px, 3vw, 28px);
+            align-items: stretch;
+        }
+
+        .ec-banner__media {
+            margin: 0;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.32);
+            background: #f5efe6;
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.75) inset,
+                0 10px 32px rgba(197, 160, 89, 0.14);
+            min-height: 280px;
+        }
+
+        .ec-banner__media img {
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
         .ec-banner__center {
             width: 100%;
-            max-width: 960px;
+            max-width: none;
             padding: clamp(18px, 2.8vw, 24px) clamp(18px, 3vw, 28px) clamp(14px, 2.2vw, 18px);
             display: flex;
             flex-direction: column;
@@ -2661,6 +2696,22 @@
             text-transform: uppercase;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .ec-banner__wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .ec-banner__media {
+                min-height: 0;
+                max-height: 300px;
+            }
+
+            .ec-banner__media img {
+                min-height: 220px;
+                max-height: 300px;
+            }
         }
 
         @media (max-width: 640px) {
@@ -3301,32 +3352,71 @@
                 <p class="gallery-creative__desc">Step through stunning interiors, iconic architecture, and curated spaces built for modern living.</p>
             </div>
 
-            <div class="gallery-creative__mosaic reveal-up revealed">
-                <figure class="gc-card gc-card--large">
-                    <button type="button" class="gc-card__open" aria-label="View Night exterior view">
-                        <img src="images/4.PNG" alt="Night exterior view" loading="lazy" decoding="async">
+            <div class="gallery-creative__slider reveal-up revealed">
+                <div class="gallery-creative__slider-outer">
+                    <div class="gallery-creative__track" id="gallery-track">
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View night exterior">
+                                <img src="images/4.PNG" alt="Night exterior view" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View rooftop deck">
+                                <img src="images/3.PNG" alt="Rooftop deck view" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View pool amenities">
+                                <img src="images/pool.PNG" alt="Pool amenities view" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View interior gallery">
+                                <img src="images/seating.PNG" alt="Interior gallery view" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View lifestyle view">
+                                <img src="images/5.PNG" alt="Lifestyle view" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View project exterior">
+                                <img src="images/photos/1.webp" alt="Godrej Samaris project exterior" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View luxury residences">
+                                <img src="images/photos/2.webp" alt="Luxury residences" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View curated landscapes">
+                                <img src="images/photos/3.webp" alt="Curated landscapes" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View lifestyle amenities">
+                                <img src="images/photos/4.webp" alt="Lifestyle amenities" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                        <figure class="gallery-creative__slide gc-card">
+                            <button type="button" class="gc-card__open" aria-label="View architectural elevation">
+                                <img src="images/photos/5.webp" alt="Architectural elevation" loading="lazy" decoding="async">
+                            </button>
+                        </figure>
+                    </div>
+                </div>
+                <div class="gallery-creative__controls">
+                    <button type="button" class="gallery-creative__btn gallery-creative__btn--prev" id="gallery-prev"
+                        aria-label="Previous gallery image">
+                        <i data-lucide="arrow-left"></i>
                     </button>
-                </figure>
-                <figure class="gc-card">
-                    <button type="button" class="gc-card__open" aria-label="View Rooftop deck view">
-                        <img src="images/3.PNG" alt="Rooftop deck view" loading="lazy" decoding="async">
+                    <button type="button" class="gallery-creative__btn gallery-creative__btn--next" id="gallery-next"
+                        aria-label="Next gallery image">
+                        <i data-lucide="arrow-right"></i>
                     </button>
-                </figure>
-                <figure class="gc-card">
-                    <button type="button" class="gc-card__open" aria-label="View Pool amenities view">
-                        <img src="images/pool.PNG" alt="Pool amenities view" loading="lazy" decoding="async">
-                    </button>
-                </figure>
-                <figure class="gc-card gc-card--tall">
-                    <button type="button" class="gc-card__open" aria-label="View Interior gallery view">
-                        <img src="images/seating.PNG" alt="Interior gallery view" loading="lazy" decoding="async">
-                    </button>
-                </figure>
-                <figure class="gc-card gc-card--wide">
-                    <button type="button" class="gc-card__open" aria-label="View Lifestyle view">
-                        <img src="images/5.PNG" alt="Lifestyle view" loading="lazy" decoding="async">
-                    </button>
-                </figure>
+                </div>
             </div>
 
             
