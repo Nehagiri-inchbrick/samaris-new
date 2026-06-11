@@ -287,137 +287,187 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Creative gallery slider
-    const galleryTrack = document.getElementById('gallery-track');
-    const galleryPrevBtn = document.getElementById('gallery-prev');
-    const galleryNextBtn = document.getElementById('gallery-next');
+    const initContinuousMarquee = ({
+        track,
+        prevBtn,
+        nextBtn,
+        progressEl,
+        counterEl,
+        sectionEl,
+        speed = 0.45,
+        slidesPerView = 2
+    }) => {
+        if (!track || track.dataset.marqueeReady === 'true') return;
 
-    if (galleryTrack) {
-        const getGallerySlides = () => Array.from(galleryTrack.querySelectorAll('.gallery-creative__slide'));
-        const getGalleryStep = (slides) => {
-            if (slides.length === 0) return 0;
-            const gap = parseFloat(getComputedStyle(galleryTrack).columnGap || getComputedStyle(galleryTrack).gap) || 16;
-            return slides[0].offsetWidth + gap;
+        const originals = Array.from(track.children).filter((child) => !child.classList.contains('marquee-clone'));
+        const total = originals.length;
+        if (total < 2) return;
+
+        originals.forEach((slide) => {
+            const clone = slide.cloneNode(true);
+            clone.classList.add('marquee-clone');
+            clone.setAttribute('aria-hidden', 'true');
+            clone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+            track.appendChild(clone);
+        });
+
+        track.dataset.marqueeReady = 'true';
+        track.classList.add('is-marquee-active');
+
+        let loopWidth = 0;
+        let slideStep = 0;
+        let offset = 0;
+        let paused = false;
+        let running = true;
+        let resumeTimer = null;
+        let reducedMotionTimer = null;
+        let lastCounterIndex = -1;
+
+        const applyOffset = () => {
+            track.style.transform = `translate3d(-${offset}px, 0, 0)`;
         };
 
-        if (galleryPrevBtn && galleryNextBtn) {
-            galleryPrevBtn.addEventListener('click', () => {
-                const slides = getGallerySlides();
-                if (slides.length === 0) return;
-                galleryTrack.scrollBy({ left: -getGalleryStep(slides), behavior: 'smooth' });
-            });
+        const outer = track.parentElement;
 
-            galleryNextBtn.addEventListener('click', () => {
-                const slides = getGallerySlides();
-                if (slides.length === 0) return;
-                galleryTrack.scrollBy({ left: getGalleryStep(slides), behavior: 'smooth' });
-            });
-        }
-    }
-
-    // Premium Amenities Carousel
-    const premiumTrack = document.getElementById('amenities-track');
-    const premiumPrev = document.getElementById('amenities-prev');
-    const premiumNext = document.getElementById('amenities-next');
-    const catItems = document.querySelectorAll('.premium-amenities__cat-item');
-
-    if (premiumTrack) {
-        const getSlides = () => Array.from(premiumTrack.querySelectorAll('.amenities-ref__slide, .premium-amenities__slide'));
-
-        const getSlideStep = (slides) => {
-            if (slides.length === 0) return 0;
-            const gap = parseFloat(getComputedStyle(premiumTrack).columnGap || getComputedStyle(premiumTrack).gap) || 16;
-            return slides[0].offsetWidth + gap;
-        };
-
-        const highlightSlide = (slides, activeIdx) => {
-            slides.forEach((slide, idx) => {
-                slide.classList.toggle('is-active', idx === activeIdx);
-            });
-        };
-
-        const updateActiveTab = () => {
-            const slides = getSlides();
-            if (slides.length === 0) return;
-
-            // Edge case: if scrolled to the very end, activate the last tab
-            const atEnd = premiumTrack.scrollLeft + premiumTrack.clientWidth >= premiumTrack.scrollWidth - 10;
-            if (atEnd) {
-                const lastIdx = slides.length - 1;
-                catItems.forEach((item, idx) => {
-                    const isActive = idx === lastIdx;
-                    item.classList.toggle('active', isActive);
-                    item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        const measure = () => {
+            const gap = parseFloat(getComputedStyle(track).gap) || 0;
+            if (outer && outer.clientWidth > 0) {
+                const slideWidth = (outer.clientWidth - gap * (slidesPerView - 1)) / slidesPerView;
+                track.querySelectorAll(':scope > *').forEach((el) => {
+                    el.style.width = `${slideWidth}px`;
+                    el.style.flex = `0 0 ${slideWidth}px`;
                 });
-                highlightSlide(slides, lastIdx);
-                return;
             }
-
-            const trackRect = premiumTrack.getBoundingClientRect();
-            let minDiff = Infinity;
-            let activeIdx = 0;
-
-            slides.forEach((slide, idx) => {
-                const slideRect = slide.getBoundingClientRect();
-                const diff = Math.abs(slideRect.left - trackRect.left);
-                if (diff < minDiff) {
-                    minDiff = diff;
-                    activeIdx = idx;
-                }
-            });
-
-            catItems.forEach((item, idx) => {
-                const isActive = idx === activeIdx;
-                item.classList.toggle('active', isActive);
-                item.setAttribute('aria-selected', isActive ? 'true' : 'false');
-            });
-            highlightSlide(slides, activeIdx);
+            slideStep = originals[0].offsetWidth + gap;
+            loopWidth = (slideStep * total) - gap;
+            if (loopWidth <= 0) loopWidth = track.scrollWidth / 2;
         };
 
-        updateActiveTab();
+        const normalizeOffset = () => {
+            if (loopWidth <= 0) return;
+            while (offset >= loopWidth) offset -= loopWidth;
+            while (offset < 0) offset += loopWidth;
+            applyOffset();
+        };
 
-        // Scroll track when clicking categories
-        catItems.forEach((item) => {
-            item.addEventListener('click', () => {
-                const idx = parseInt(item.dataset.slideIndex, 10);
-                const slides = getSlides();
-                if (slides[idx]) {
-                    const trackRect = premiumTrack.getBoundingClientRect();
-                    const slideRect = slides[idx].getBoundingClientRect();
+        const getActiveIndex = () => {
+            if (slideStep <= 0 || loopWidth <= 0) return 0;
+            const idx = Math.floor((offset + slideStep * 0.35) / slideStep);
+            return ((idx % total) + total) % total;
+        };
 
-                    premiumTrack.scrollTo({
-                        left: premiumTrack.scrollLeft + (slideRect.left - trackRect.left),
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+        const updateUI = () => {
+            if (progressEl && loopWidth > 0) {
+                progressEl.style.width = `${(offset / loopWidth) * 100}%`;
+            }
+            const activeIndex = getActiveIndex();
+            if (counterEl && activeIndex !== lastCounterIndex) {
+                lastCounterIndex = activeIndex;
+                counterEl.textContent = `${activeIndex + 1} / ${total}`;
+            }
+        };
 
-        // Prev / Next button listeners
-        if (premiumPrev && premiumNext) {
-            premiumPrev.addEventListener('click', () => {
-                const slides = getSlides();
-                if (slides.length === 0) return;
-                premiumTrack.scrollBy({ left: -getSlideStep(slides), behavior: 'smooth' });
-            });
+        const pauseBriefly = (ms = 2200) => {
+            paused = true;
+            clearTimeout(resumeTimer);
+            resumeTimer = setTimeout(() => {
+                paused = false;
+            }, ms);
+        };
 
-            premiumNext.addEventListener('click', () => {
-                const slides = getSlides();
-                if (slides.length === 0) return;
-                premiumTrack.scrollBy({ left: getSlideStep(slides), behavior: 'smooth' });
-            });
+        const pageStep = () => slideStep * slidesPerView;
+
+        const tick = () => {
+            if (running && !paused && !prefersReducedMotion && loopWidth > 0) {
+                offset += speed;
+                normalizeOffset();
+                updateUI();
+            }
+            requestAnimationFrame(tick);
+        };
+
+        if (sectionEl) {
+            const visibilityObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    running = entry.isIntersecting;
+                });
+            }, { threshold: 0.05, rootMargin: '80px 0px' });
+            visibilityObserver.observe(sectionEl);
         }
 
-        // Scroll listener to update category highlights
-        let scrollTimeout;
-        premiumTrack.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(updateActiveTab, 100);
+        const hoverTarget = track.closest('.amenities-ref__slider-outer, .gallery-creative__slider-outer') || track;
+        hoverTarget.addEventListener('mouseenter', () => { paused = true; });
+        hoverTarget.addEventListener('mouseleave', () => { paused = false; });
+
+        prevBtn?.addEventListener('click', () => {
+            offset -= pageStep();
+            normalizeOffset();
+            updateUI();
+            pauseBriefly();
         });
 
-        // Initial run
-        updateActiveTab();
-    }
+        nextBtn?.addEventListener('click', () => {
+            offset += pageStep();
+            normalizeOffset();
+            updateUI();
+            pauseBriefly();
+        });
+
+        const refresh = () => {
+            measure();
+            normalizeOffset();
+            updateUI();
+        };
+
+        track.querySelectorAll('img').forEach((img) => {
+            if (!img.complete) {
+                img.addEventListener('load', refresh, { once: true });
+            }
+        });
+
+        refresh();
+        requestAnimationFrame(tick);
+
+        if (prefersReducedMotion) {
+            reducedMotionTimer = window.setInterval(() => {
+                if (!running || paused || loopWidth <= 0) return;
+                offset += pageStep();
+                normalizeOffset();
+                updateUI();
+            }, 4200);
+        }
+
+        window.addEventListener('resize', refresh);
+        window.addEventListener('load', refresh);
+
+        return () => {
+            running = false;
+            clearTimeout(resumeTimer);
+            if (reducedMotionTimer) clearInterval(reducedMotionTimer);
+        };
+    };
+
+    initContinuousMarquee({
+        track: document.getElementById('amenities-track'),
+        prevBtn: document.getElementById('amenities-prev'),
+        nextBtn: document.getElementById('amenities-next'),
+        progressEl: document.getElementById('amenities-progress'),
+        counterEl: document.getElementById('amenities-counter'),
+        sectionEl: document.getElementById('amenities'),
+        speed: 0.5,
+        slidesPerView: 2
+    });
+
+    initContinuousMarquee({
+        track: document.getElementById('gallery-track'),
+        prevBtn: document.getElementById('gallery-prev'),
+        nextBtn: document.getElementById('gallery-next'),
+        progressEl: document.getElementById('gallery-progress'),
+        counterEl: document.getElementById('gallery-counter'),
+        sectionEl: document.getElementById('gallery'),
+        speed: 0.5,
+        slidesPerView: 2
+    });
 
     // Traveling Map Interactions
     const mapNodes = document.querySelectorAll('.map-node');

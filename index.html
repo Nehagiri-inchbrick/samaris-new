@@ -115,7 +115,7 @@
     <link rel="preload" as="image" href="banner-960.webp" fetchpriority="high"
         media="(min-width: 769px) and (max-width: 1280px)">
     <link rel="preload" as="image" href="banner-1920.webp" fetchpriority="high" media="(min-width: 1281px)">
-    <link rel="preload" href="style.deferred.css?v=3.1" as="style">
+    <link rel="preload" href="style.deferred.css?v=4.3" as="style">
     <style id="critical-css">
         :root {
             --primary: #C5A059;
@@ -2008,9 +2008,9 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="style.deferred.css?v=3.1" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="style.deferred.css?v=4.3" media="print" onload="this.media='all'">
     <noscript>
-        <link rel="stylesheet" href="style.deferred.css?v=3.1">
+        <link rel="stylesheet" href="style.deferred.css?v=4.3">
     </noscript>
 </head>
 
@@ -2386,7 +2386,7 @@
         <div class="ec-banner__wrap">
             <figure class="ec-banner__media reveal-up">
                 <img src="images/gallery/about-img.webp" alt="Godrej Samaris — a community reserved for the elites"
-                    width="640" height="480" loading="lazy" decoding="async">
+                    width="640" height="640" loading="lazy" decoding="async">
             </figure>
 
             <div class="ec-banner__center reveal-up">
@@ -2471,8 +2471,8 @@
             width: 100%;
             max-width: 1080px;
             display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-            gap: clamp(18px, 3vw, 28px);
+            grid-template-columns: minmax(260px, 40%) minmax(0, 1fr);
+            gap: clamp(20px, 3.5vw, 36px);
             align-items: stretch;
         }
 
@@ -2485,24 +2485,29 @@
             box-shadow:
                 0 0 0 1px rgba(255, 255, 255, 0.75) inset,
                 0 10px 32px rgba(197, 160, 89, 0.14);
-            min-height: 280px;
+            height: 100%;
+            min-height: clamp(280px, 36vw, 400px);
+            display: flex;
         }
 
         .ec-banner__media img {
             width: 100%;
             height: 100%;
-            min-height: 280px;
+            min-height: 100%;
             object-fit: cover;
+            object-position: center 42%;
             display: block;
+            filter: brightness(1.04) saturate(1.08) contrast(1.04);
         }
 
         .ec-banner__center {
             width: 100%;
             max-width: none;
-            padding: clamp(18px, 2.8vw, 24px) clamp(18px, 3vw, 28px) clamp(14px, 2.2vw, 18px);
+            padding: clamp(20px, 2.8vw, 28px) clamp(20px, 3vw, 32px);
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-align: center;
             border-radius: 14px;
             border: 1px solid rgba(197, 160, 89, 0.32);
@@ -2510,6 +2515,7 @@
             box-shadow:
                 0 0 0 1px rgba(255, 255, 255, 0.8) inset,
                 0 8px 28px rgba(197, 160, 89, 0.12);
+            min-height: clamp(280px, 36vw, 400px);
         }
 
         .ec-banner__heading {
@@ -2701,16 +2707,24 @@
         @media (max-width: 768px) {
             .ec-banner__wrap {
                 grid-template-columns: 1fr;
+                gap: 16px;
             }
 
             .ec-banner__media {
                 min-height: 0;
-                max-height: 300px;
+                height: auto;
+                aspect-ratio: 16 / 10;
+                max-height: 320px;
             }
 
             .ec-banner__media img {
-                min-height: 220px;
-                max-height: 300px;
+                min-height: 0;
+                height: 100%;
+                object-position: center 40%;
+            }
+
+            .ec-banner__center {
+                min-height: 0;
             }
         }
 
@@ -2766,9 +2780,9 @@
             </header>
 
             <!-- 4-column slider -->
-            <div class="amenities-ref__slider reveal-up">
+            <div class="amenities-ref__slider">
                 <div class="amenities-ref__slider-outer">
-                    <div class="amenities-ref__track" id="amenities-track">
+                    <div class="amenities-ref__track is-marquee" id="amenities-track" data-marquee>
 
                         <figure class="amenities-ref__slide">
                             <img src="images/gallery/1.webp" alt="Wellness Clubhouse"
@@ -2818,13 +2832,15 @@
                     </div>
                 </div>
 
-                <div class="amenities-ref__controls">
-                    <button type="button" class="amenities-ref__btn amenities-ref__btn--prev"
-                        id="amenities-prev" aria-label="Previous amenities">
+                <div class="marquee-nav amenities-ref__marquee-nav">
+                    <button type="button" class="marquee-nav__btn" id="amenities-prev" aria-label="Previous amenities">
                         <i data-lucide="arrow-left"></i>
                     </button>
-                    <button type="button" class="amenities-ref__btn amenities-ref__btn--next"
-                        id="amenities-next" aria-label="Next amenities">
+                    <div class="marquee-nav__progress" aria-hidden="true">
+                        <span class="marquee-nav__progress-fill" id="amenities-progress"></span>
+                    </div>
+                    <span class="marquee-nav__counter" id="amenities-counter" aria-live="polite">1 / 7</span>
+                    <button type="button" class="marquee-nav__btn" id="amenities-next" aria-label="Next amenities">
                         <i data-lucide="arrow-right"></i>
                     </button>
                 </div>
@@ -3352,9 +3368,9 @@
                 <p class="gallery-creative__desc">Step through stunning interiors, iconic architecture, and curated spaces built for modern living.</p>
             </div>
 
-            <div class="gallery-creative__slider reveal-up revealed">
+            <div class="gallery-creative__slider">
                 <div class="gallery-creative__slider-outer">
-                    <div class="gallery-creative__track" id="gallery-track">
+                    <div class="gallery-creative__track is-marquee" id="gallery-track" data-marquee>
                         <figure class="gallery-creative__slide gc-card">
                             <button type="button" class="gc-card__open" aria-label="View night exterior">
                                 <img src="images/4.PNG" alt="Night exterior view" loading="lazy" decoding="async">
@@ -3407,13 +3423,15 @@
                         </figure>
                     </div>
                 </div>
-                <div class="gallery-creative__controls">
-                    <button type="button" class="gallery-creative__btn gallery-creative__btn--prev" id="gallery-prev"
-                        aria-label="Previous gallery image">
+                <div class="marquee-nav marquee-nav--on-dark gallery-creative__marquee-nav">
+                    <button type="button" class="marquee-nav__btn" id="gallery-prev" aria-label="Previous gallery image">
                         <i data-lucide="arrow-left"></i>
                     </button>
-                    <button type="button" class="gallery-creative__btn gallery-creative__btn--next" id="gallery-next"
-                        aria-label="Next gallery image">
+                    <div class="marquee-nav__progress" aria-hidden="true">
+                        <span class="marquee-nav__progress-fill" id="gallery-progress"></span>
+                    </div>
+                    <span class="marquee-nav__counter" id="gallery-counter" aria-live="polite">1 / 10</span>
+                    <button type="button" class="marquee-nav__btn" id="gallery-next" aria-label="Next gallery image">
                         <i data-lucide="arrow-right"></i>
                     </button>
                 </div>
